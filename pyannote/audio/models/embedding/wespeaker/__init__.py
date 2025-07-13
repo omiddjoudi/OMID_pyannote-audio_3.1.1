@@ -32,6 +32,8 @@ from pyannote.audio.core.task import Task
 
 from .resnet import ResNet34, ResNet152, ResNet221, ResNet293
 
+import functorch
+
 #OMID
 #PROBLEM torch vmap in Sagemaker Endpoint
 #https://github.com/pyannote/pyannote-audio/issues/1537
