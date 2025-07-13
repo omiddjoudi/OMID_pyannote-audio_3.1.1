@@ -32,21 +32,6 @@ from pyannote.audio.core.task import Task
 
 from .resnet import ResNet34, ResNet152, ResNet221, ResNet293
 
-import functorch
-
-#OMID
-#PROBLEM torch vmap in Sagemaker Endpoint
-#https://github.com/pyannote/pyannote-audio/issues/1537
-
-'''
-if torch.__version__ >= "2.0.0":
-    # Use torch.vmap for torch 2.0 or newer
-    from torch import vmap
-else:
-    # Use functorch.vmap for torch 1.12 or older
-    from functorch import vmap
-'''
-
 class BaseWeSpeakerResNet(Model):
     def __init__(
         self,
@@ -105,7 +90,7 @@ class BaseWeSpeakerResNet(Model):
         device = waveforms.device
         fft_device = torch.device("cpu") if device.type == "mps" else device
 
-        features = functorch.vmap(self._fbank)(waveforms.to(fft_device)).to(device)
+        features = torch.vmap(self._fbank)(waveforms.to(fft_device)).to(device)
 
         return features - torch.mean(features, dim=1, keepdim=True)
 
