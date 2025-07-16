@@ -13,7 +13,7 @@ semver >= 3.0.0
 soundfile >= 0.12.1
 speechbrain >= 0.5.14
 tensorboardX >= 2.6
-torch == 2.6.0
+torch
 torch_audiomentations >= 0.11.0
-torchaudio == 2.6.0
+torchaudio
 torchmetrics >= 0.11.0
